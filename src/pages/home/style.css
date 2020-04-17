@@ -1,0 +1,97 @@
+.order_status {
+    background: #808080;
+    padding: 10px 30px;
+    margin: 40px;
+    border-radius: 10px;
+}
+
+.order_status .user_info {
+    display: flex;
+    font-size: 30px;
+    margin-left: 30px;
+}
+
+.order_status .user_info p {
+    margin-left: 50px;
+}
+
+.icon_login {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    top: 20px;
+}
+
+.order_info ul {
+    display: flex;
+}
+
+.order_info ul li {
+    width: 20%;
+}
+
+.order_info ul li p {
+    text-align: center;
+    color: #383535;
+}
+
+.order_info ul li p:nth-of-type(1) {
+    font-size: 32px;
+}
+
+.order_info ul li p:nth-of-type(2) {
+    color: #2b1f1f;
+    font-size: 30px;
+}
+
+.menu {
+    margin: 40px;
+    padding: 50px 5px;
+    background: #a1a0a0;
+    border-radius: 10px;
+    color: #615e5e;
+}
+
+.menu ul {
+    display: flex;
+}
+
+.menu ul li {
+    padding-top: 15px;
+    border-radius: 5px;
+    width: 33.3%;
+}
+
+.menu ul li:active {
+    background-color: #8b8a8a;
+}
+
+.menu ul li img,
+.add_order img {
+    width: 50px;
+}
+
+.menu ul li div, .menu ul li p, .add_order div {
+    text-align: center;
+    font-size: 25px;
+}
+.add_order{
+    width: 100%;
+    position: fixed;
+    display: flex;
+    bottom: 80px;
+    color: #615e5e;
+}
+.add_order div{
+    width: 160px;
+    padding-top: 20px;
+    background-color: #bbb8b8;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+.add_order div:active{
+    background-color: #afaaaa;
+}
+.add_order div p{
+    margin: 15px;
+}
