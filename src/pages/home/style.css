@@ -30,7 +30,7 @@
     width: 20%;
 }
 
-.order_info ul li p {
+.order_info ul li p,a {
     text-align: center;
     color: #383535;
 }

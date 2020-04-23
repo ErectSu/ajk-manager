@@ -6,7 +6,7 @@ import './style.css'
 function Login(){
 
     return (
-        <div>
+        <div className="login">
             <LoginForm />
             <LoginBtn />
         </div>

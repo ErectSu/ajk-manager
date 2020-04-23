@@ -1,7 +1,18 @@
-import React, { Component } from 'react';
+import React, { } from 'react';
 import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 function Menu(props) {
+    const history = useHistory()
+    const toOrder = (item) => {
+        console.log(item)
+        if (item.value == "房态") {
+            history.push(item.path)
+        }
+        else {
+            window.location.href = item.path
+        }
+    }
 
     let { menu_list } = props
     return (
@@ -10,12 +21,14 @@ function Menu(props) {
                 {
                     menu_list.map((item, index) => {
                         return (
-                            <li key={index + item}>
+
+                            <li key={index + item} onClick={() => toOrder(item)}>
                                 <div>
-                                    <img src={item.img} alt=""/>
+                                    <img src={item.img} alt="" />
                                 </div>
                                 <p>{item.value}</p>
                             </li>
+
                         )
                     })
                 }
@@ -26,7 +39,7 @@ function Menu(props) {
 
 const mapDefaultProps = (state) => {
     return {
-        menu_list: state.list
+        menu_list: state.home.list
     }
 }
 

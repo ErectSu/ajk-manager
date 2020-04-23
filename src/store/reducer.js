@@ -1,43 +1,7 @@
+
+import { TEL_INPUT, PRICE_INPUT, CUSTOMER_INPUT, IDCARD_INPUT, SOURCE_INPUT } from './actionTypes'
+
 const defaultState = {
-    data: [
-        {
-            title: '订单',
-            num: '10'
-        },
-        {
-            title: '已住',
-            num: '10'
-        },
-        {
-            title: '入住',
-            num: '10'
-        },
-        {
-            title: '退房',
-            num: '10'
-        },
-        {
-            title: '空房',
-            num: '10'
-        }
-    ],
-    list: [
-        {
-            value: '房态',
-            img: 'icons/house.png',
-            path: ''
-        },
-        {
-            value: '订单',
-            img: 'icons/order.png',
-            path: ''
-        },
-        {
-            value: '门锁密码',
-            img: 'icons/lock_psw.png',
-            path: ''
-        }
-    ],
     source: [
         { value: 0, label: '美团' },
         { value: 1, label: '携程' },
@@ -50,58 +14,46 @@ const defaultState = {
         { value: 8, label: '公众号' },
         { value: 9, label: '其他' }
     ],
-    price:'',
-    sourceType:'',
-    customer:'',
-    tel:{
-        value:'',
-        status:false
+    price: '',
+    sourceType: '',
+    customer: '',
+    tel: {
+        value: '',
+        status: false
     },
-    idCard:''
+    idCard: ''
 }
 
 export default (state = defaultState, action) => {
-    if (action.type === 'COUNT_DOWN') {
-        let newState = JSON.parse(JSON.stringify(state))
-        setInterval(() => {
-            newState.count--
-        }, 1000);
-        return newState
-    }
-    if (action.type === 'TEL_INPUT') {
+
+    if (action.type === TEL_INPUT) {
         let newState = JSON.parse(JSON.stringify(state))
         newState.tel.value = action.value
-        if(newState.tel.value.replace(/\s/g, '').length < 11){
+        if (newState.tel.value.replace(/\s/g, '').length < 11) {
             newState.tel.status = true
-        }else{
+        } else {
             newState.tel.status = false
         }
         return newState
     }
-    if (action.type === 'PRICE_INPUT') {
+    if (action.type === PRICE_INPUT) {
         let newState = JSON.parse(JSON.stringify(state))
         newState.price = action.value
         return newState
     }
-    if (action.type === 'CUSTOMER_INPUT') {
+    if (action.type === CUSTOMER_INPUT) {
         let newState = JSON.parse(JSON.stringify(state))
         newState.customer = action.value
         return newState
     }
-    if (action.type === 'IDCARD_INPUT') {
+    if (action.type === IDCARD_INPUT) {
         let newState = JSON.parse(JSON.stringify(state))
         newState.idCard = action.value
         return newState
     }
-    if (action.type === 'SOURCE_INPUT') {
+    if (action.type === SOURCE_INPUT) {
         let newState = JSON.parse(JSON.stringify(state))
         newState.sourceType = action.value
-        return newState
-    }
-    if(action.type === 'RESET_DATA'){
-        let newState = JSON.parse(JSON.stringify(state))
-        newState = undefined
-        console.log(newState)
         return newState
     }
     return state

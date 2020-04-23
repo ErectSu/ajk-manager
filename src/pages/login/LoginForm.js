@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Toast } from 'antd-mobile';
+import * as actions from '../../actions/login-action'
+import Rember from './Rember'
 
 function LoginForm(props) {
     const [code, setCode] = useState(0)
-    const [tel, setTEL] = useState('') // 输入的手机号
     const [text, setText] = useState('获取密码')
     const [isSend, setIsSend] = useState(false) // 是否发送验证码
-
+    const { tel, psw, handleTelValue, handlePswValue,getCodeActions } = props
     async function clickBtn() {
+
         if (!tel || code != 0) {
             Toast.fail('手机号错误!')
             return
         }
         else {
-            Toast.success('发送成功', 2)
-            setCode(5)
+            getCodeActions.getCode(tel)
+            setCode(60)
             setIsSend(true)
         }
     }
     useEffect(() => {
+        console.log(props)
         let timer = null
-
         if (code > 0) {
             setText(text => code)
             timer = setInterval(() => {
@@ -42,11 +45,25 @@ function LoginForm(props) {
         <div className="login_form">
             <div className="tel_input">
                 <img className="login_user" src='icons/user.png' alt="" />
-                <input className="input" maxLength="11" type="text" placeholder="请输入手机号" />
+                <input
+                    className="input"
+                    maxLength="11"
+                    type="text"
+                    value={tel}
+                    placeholder="请输入手机号"
+                    onChange={handleTelValue}
+                />
             </div>
             <div className="psw_input">
                 <img className="login_lock" src='icons/lock.png' alt="" />
-                <input className="input" type="password" placeholder="请输入密码" />
+                <input
+                    className="input"
+                    type="password"
+                    value={psw}
+                    placeholder="请输入密码"
+                    maxLength="6"
+                    onChange={handlePswValue}
+                />
                 <button
                     className="get_psw"
                     onClick={clickBtn}
@@ -55,21 +72,30 @@ function LoginForm(props) {
                     {text}
                 </button>
             </div>
+            <Rember />
         </div>
     )
-
 }
 
 const storeDefaultProps = (state) => {
     return {
-        count: state.count,
-        text: state.text
+        tel: state.login.telephone,
+        psw: state.login.password,
+        isRember: state.login.isRember
     }
 }
 
 const dispatchToProps = (dispatch) => {
     return {
-
+        handleTelValue(e) {
+            const action = actions.loginInputAction(e.target.value)
+            dispatch(action)
+        },
+        handlePswValue(e) {
+            const action = actions.passwordInputAction(e.target.value)
+            dispatch(action)
+        },
+        getCodeActions:bindActionCreators(actions,dispatch)
     }
 }
 

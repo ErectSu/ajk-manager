@@ -3,14 +3,14 @@ import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 function OrderStatus(props) {
+    
     let history = useHistory()
-    let { data } = props
-
+    let { data,userName } = props
     return (
         <div className="order_status">
             <div className="user_info">
                 <img className="icon_login" src="icons/login.png" alt="" />
-                <p>18256457525</p>
+                <p>{userName}</p>
                 <p onClick={() => history.push('/')}>退出</p>
             </div>
             <div className="order_info">
@@ -33,7 +33,8 @@ function OrderStatus(props) {
 
 const mapDefaultProps = (state) => {
     return {
-        data: state.data
+        data: state.home.data,
+        userName:state.login.telephone
     }
 }
 

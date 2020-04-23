@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import { List, InputItem, Picker, Toast } from 'antd-mobile';
 import { createForm } from 'rc-form';
+import { TEL_INPUT, PRICE_INPUT, CUSTOMER_INPUT, IDCARD_INPUT, SOURCE_INPUT } from '../../store/actionTypes'
 
 function AddForm(props) {
 
-    let { data, tel, source, onChange, idCard, price, customer, changePrice, changeCustomer, changeIdCard,changeSource } = props
+    let { data, tel, source, onChange, idCard, price, customer, changePrice, changeCustomer, changeIdCard, changeSource } = props
     console.log(props)
     const { getFieldProps } = props.form;
 
@@ -71,53 +72,48 @@ function AddForm(props) {
 
 const mapDefaultProps = (state) => {
     return {
-        data: state.source,
-        tel: state.tel,
-        price: state.price,
-        customer: state.customer,
-        idCard: state.idCard,
-        source: state.sourceType
+        data: state.reducer.source,
+        tel: state.reducer.tel,
+        price: state.reducer.price,
+        customer: state.reducer.customer,
+        idCard: state.reducer.idCard,
+        source: state.reducer.sourceType
     }
 }
 
 const mapDispatchProps = (dispatch) => {
     return {
         onChange(value) {
-            console.log(value)
             let action = {
-                type: 'TEL_INPUT',
+                type: TEL_INPUT,
                 value: value
             }
             dispatch(action)
         },
         changePrice(value) {
-            console.log(value)
             let action = {
-                type: 'PRICE_INPUT',
+                type: PRICE_INPUT,
                 value: value
             }
             dispatch(action)
         },
         changeCustomer(value) {
-            console.log(value)
             let action = {
-                type: 'CUSTOMER_INPUT',
+                type: CUSTOMER_INPUT,
                 value: value
             }
             dispatch(action)
         },
         changeIdCard(value) {
-            console.log(value)
             let action = {
-                type: 'IDCARD_INPUT',
+                type: IDCARD_INPUT,
                 value: value
             }
             dispatch(action)
         },
         changeSource(value) {
-            console.log(value.toString())
             let action = {
-                type: 'SOURCE_INPUT',
+                type: SOURCE_INPUT,
                 value: value.toString()
             }
             dispatch(action)

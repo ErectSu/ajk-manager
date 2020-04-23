@@ -2,29 +2,30 @@ import React, { Component } from 'react';
 import { Toast } from 'antd-mobile'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
+import { RESET_DATA } from '../../store/actionTypes'
 
 function AddButton(props) {
 
     const { data } = props
     const saveBtn = () => {
-        if(!data.price) {
-            Toast.info('请输入价格',2)
+        if (!data.price) {
+            Toast.info('请输入价格', 2)
             return
         }
-        if(!data.sourceType) {
-            Toast.info('请选择来源',2)
+        if (!data.sourceType) {
+            Toast.info('请选择来源', 2)
             return
         }
-        if(!data.customer) {
-            Toast.info('请输入姓名',2)
+        if (!data.customer) {
+            Toast.info('请输入姓名', 2)
             return
         }
-        if(!data.tel.value || data.tel.status) {
-            Toast.info('请输入手机号',2)
+        if (!data.tel.value || data.tel.status) {
+            Toast.info('请输入手机号', 2)
             return
         }
-        if(!data.idCard) {
-            Toast.info('请输入身份证号',2)
+        if (!data.idCard) {
+            Toast.info('请输入身份证号', 2)
             return
         }
         console.log(props)
@@ -43,17 +44,15 @@ function AddButton(props) {
 
 const mapDefaultProps = (state) => {
     return {
-        data:state
+        data: state.reducer
     }
 }
-// const history = useHistory()
-const mapDispatchProps = (dispatch) =>{
+
+const mapDispatchProps = (dispatch) => {
     return {
-        cancel(){
-            
-            dispatch({type:'RESET_DATA'})
+        cancel() {
+            dispatch({ type: RESET_DATA })
             dispatch(push('/home'))
-            
         }
     }
 }

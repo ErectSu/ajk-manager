@@ -3,10 +3,15 @@ import { useHistory } from 'react-router-dom'
 
 function Refresh() {
     let history = useHistory()
+    
+    const addOrder = ()=>{
+        // history.push('/add')
+        window.location.href = 'http://demo.live-ctrl.com/wechatx/#/addOrder'
+    }
 
     return (
         <div className="add_order">
-            <div className="add_btn" onClick={()=>history.push('/add')}>
+            <div className="add_btn" onClick={addOrder}>
                 <img src="icons/add.png" alt="" />
                 <p>新订单</p>
             </div>

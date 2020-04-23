@@ -1,0 +1,32 @@
+
+.house th,td{
+    width: 17%;
+    text-align: center;
+    background-color: #e4e0e0;
+    color: rgb(68, 51, 51);
+}
+.house th{
+    height: 160px;
+    color: #054d50;
+    font-weight: normal;
+}
+.house th p{
+    padding: 0;
+    margin: 0;
+}
+.house th p:nth-of-type(3){
+    margin-top: 20px;
+    color: rgb(165, 111, 29);
+}
+tbody tr td{
+    height: 130px;
+    color: rgb(133, 130, 128);
+}
+tbody tr td:nth-of-type(1){
+    color: rgb(51, 54, 54);
+    font-weight: bold;
+}
+.tip{
+    margin-left: 25px;
+    color: rgb(118, 182, 55);
+}
