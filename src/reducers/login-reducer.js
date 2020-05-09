@@ -1,4 +1,4 @@
-import { LOGIN_INPUT, PASSWORD_INPUT, IS_REMBER, GET_CUSTOMER } from '../store/actionTypes'
+import { LOGIN_INPUT, PASSWORD_INPUT, IS_REMBER, GET_TOKEN, GET_HOTELID } from '../store/actionTypes'
 
 let defaultState
 if (localStorage.getItem('deleteTime') >= new Date().getTime()) {
@@ -6,14 +6,17 @@ if (localStorage.getItem('deleteTime') >= new Date().getTime()) {
         telephone: localStorage.getItem('userName'),
         password: localStorage.getItem('password'),
         isRember: localStorage.getItem('isRember'),
-        customerId: ''
+        hotelId: '',
+        token: ''
     }
 } else {
     defaultState = {
         telephone: '',
         password: '',
         isRember: '',
-        customerId: ''
+        hotelId: '',
+        customerId:'',
+        token: ''
     }
 }
 
@@ -26,8 +29,10 @@ export default (state = defaultState, action) => {
             return { ...state, password: action.value }
         case IS_REMBER:
             return { ...state, isRember: action.value }
-        case GET_CUSTOMER:
-            return { ...state, customerId: action.value }
+        case GET_HOTELID:
+            return { ...state, hotelId: action.value }
+        case GET_TOKEN:
+            return { ...state, token: action.value }
         default:
             return state
     }

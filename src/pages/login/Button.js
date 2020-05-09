@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -8,6 +8,7 @@ import { Toast } from 'antd-mobile'
 function LoginBtn(props) {
     const { tel, psw,isRember, homeActions } = props
     console.log(props)
+
     function goHome() {
         if (!tel) {
             Toast.info('请输入手机号', 2)

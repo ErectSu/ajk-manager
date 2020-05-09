@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { DatePicker } from 'antd-mobile'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import * as actions from '../../actions/status-action'
 import './style.css'
 
 const nowTimeStamp = Date.now();
-
 const now = new Date(nowTimeStamp);
 
 function House(props) {
-    console.log(props)
-    const { time_list, handleSure } = props
-    
+    document.title = '房态'
+    const { time_list, handleSure, houseActions, hotelId } = props
+
     useEffect(() => {
         handleSure()
+        houseActions.statusAction('', hotelId, '', '', '')
     }, [])
 
     return (
@@ -79,7 +80,8 @@ function House(props) {
 
 const mapStateToProps = (state) => {
     return {
-        time_list: state.status.time_list
+        time_list: state.status.time_list,
+        hotelId: state.status.hotelId
     }
 }
 const mapDispatchProps = (dispatch) => {
@@ -87,7 +89,8 @@ const mapDispatchProps = (dispatch) => {
         handleSure(value) {
             const action = actions.addTime(value)
             dispatch(action)
-        }
+        },
+        houseActions: bindActionCreators(actions, dispatch)
     }
 }
 

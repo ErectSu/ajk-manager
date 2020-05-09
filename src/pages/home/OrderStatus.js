@@ -9,7 +9,9 @@ function OrderStatus(props) {
     return (
         <div className="order_status">
             <div className="user_info">
-                <img className="icon_login" src="icons/login.png" alt="" />
+                <div className="img_box">
+                    <img className="icon_login" src="icons/login.png" alt="" />
+                </div>
                 <p>{userName}</p>
                 <p onClick={() => history.push('/')}>退出</p>
             </div>

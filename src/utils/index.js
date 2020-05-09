@@ -16,12 +16,12 @@ export const config = {
         base: 'http://demo.live-ctrl.com/aijukex/',
         getHotelList: 'reserva_getHotelHouses',
         getPassword: 'tenement/manager_hotel_getPassword',
-        getLogin: 'tenement/manager_hotel_login',
+        getLogin: 'hotel/login',
         cancelOrder: 'reserva_cancelOrder',
         reviseOrder: 'reserva_updateOrder',
         managerLogin: 'tenement/hotel_login',
         getManagerPsw: 'tenement/hotel_getPassword',
-        getHotelInfo:'tenement/manager_hotel_getHotels'
+        getHotelStatus:'hotel/getRoomAllocationRecord'
     }
 }
 
@@ -51,9 +51,9 @@ export const request = {
             fetch(postUrl, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                    'Content-Type': 'application/json'
                 },
-                body: qs.stringify(data)
+                body: JSON.stringify(data)
             })
                 .then(res => res.json())
                 .then(data => {
