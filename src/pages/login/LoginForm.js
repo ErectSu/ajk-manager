@@ -70,13 +70,13 @@ function LoginForm(props) {
                     maxLength="6"
                     onChange={handlePswValue}
                 />
-                <button
+                {/* <button
                     className="get_psw"
                     onClick={clickBtn}
                     disabled={isSend}
                 >
                     {text}
-                </button>
+                </button> */}
             </div>
             <Rember />
         </div>

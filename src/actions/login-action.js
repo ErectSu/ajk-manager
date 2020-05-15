@@ -1,7 +1,7 @@
 import { Toast } from 'antd-mobile'
 import { config, request } from '../utils'
 import { push } from 'react-router-redux'
-import { LOGIN_INPUT, PASSWORD_INPUT, GET_HOTELID, GET_TOKEN } from '../store/actionTypes'
+import { LOGIN_INPUT, PASSWORD_INPUT, SAVE_HOTELID, SAVE_TOKEN } from '../store/actionTypes'
 
 export const getCode = (tel) => {
     return (dispatch) => {
@@ -22,14 +22,13 @@ export const loginAction = (tel, psw, isRember) => {
             .then(res => {
                 if (res && res.success) {
                     Toast.info('登录成功', 2)
-                    const action = getHotelId(res.dataObject.account.id)
-                    // getCookie('JSESSIONID')
-                    // console.log(getCookie('JSESSIONID'))
-                    // const tokenAction = getToken()
-                    dispatch(action)
-                    // dispatch(push('/home'))
-                    sessionStorage.setItem('customerId', res.dataObject.account.id)
-                    sessionStorage.setItem('hotelId', res.dataObject.hotels[0].id)
+                    sessionStorage.setItem('hotelName',res.dataObject.hotels[0].name)
+                    const idAction = saveHotelId(res.dataObject.hotels[0].id)
+                    const tokenAction = saveToken(res.dataObject.token)
+                    dispatch(idAction)
+                    dispatch(tokenAction)
+                    dispatch(push('/home'))
+                    
                     if (isRember) {
                         localStorage.setItem('userName', tel)
                         localStorage.setItem('password', psw)
@@ -73,16 +72,16 @@ export const passwordInputAction = (value) => {
     }
 }
 
-export const getHotelId = (value) => {
+export const saveHotelId = (value) => {
     return {
-        type: GET_HOTELID,
+        type: SAVE_HOTELID,
         value
     }
 }
 
-export const getToken = (value) => {
+export const saveToken = (value) => {
     return {
-        type: GET_TOKEN,
+        type: SAVE_TOKEN,
         value
     }
 }

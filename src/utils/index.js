@@ -3,6 +3,13 @@ import 'whatwg-fetch'
 import 'es6-promise'
 import { Toast } from 'antd-mobile'
 
+let base
+if (process.env.NODE_ENV == 'development') {
+    base = '/api/'
+} else {
+    base = 'http://demo.live-ctrl.com/aijukex/'
+}
+
 export const config = {
     header: {
         method: "POST",
@@ -12,8 +19,7 @@ export const config = {
         }
     },
     api: {
-        // base: 'http://192.168.0.52:8888/aijukex/',
-        base: 'http://demo.live-ctrl.com/aijukex/',
+        base,
         getHotelList: 'reserva_getHotelHouses',
         getPassword: 'tenement/manager_hotel_getPassword',
         getLogin: 'hotel/login',
@@ -21,7 +27,7 @@ export const config = {
         reviseOrder: 'reserva_updateOrder',
         managerLogin: 'tenement/hotel_login',
         getManagerPsw: 'tenement/hotel_getPassword',
-        getHotelStatus:'hotel/getRoomAllocationRecord'
+        getHotelStatus: 'hotel/getRoomAllocationRecord'
     }
 }
 
@@ -59,7 +65,7 @@ export const request = {
                 .then(data => {
                     resolve(data)
                     if (data.success) {
-                        Toast.info(data.msg)
+                        // Toast.info(data.msg)
                     }
                     else {
                         Toast.info(data.msg)

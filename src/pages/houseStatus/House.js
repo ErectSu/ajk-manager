@@ -10,11 +10,16 @@ const now = new Date(nowTimeStamp);
 
 function House(props) {
     document.title = '房态'
-    const { time_list, handleSure, houseActions, hotelId } = props
+    const { time_list, handleSure, houseActions, hotelId, beginTime, endTime, data, token } = props
+    console.log(props)
+    useEffect(() => {
+        if (beginTime != '' && endTime != '') {
+            houseActions.statusAction(token, hotelId, beginTime, endTime)
+        }
+    }, [beginTime, endTime])
 
     useEffect(() => {
         handleSure()
-        houseActions.statusAction('', hotelId, '', '', '')
     }, [])
 
     return (
@@ -48,40 +53,50 @@ function House(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>222</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td>222</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                    </tr>
-                    <tr>
-                        <td>222</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                        <td>111</td>
-                    </tr>
+                    {
+                        data.map((item, index) => {
+                            return (
+                                <tr key={item + index}>
+                                    {
+                                        item.status == 3 ? null :
+                                            <td>{item.houseName}</td>
+                                    }
+                                    {
+                                        item.status != 3 ?
+                                            time_list.map((childItem, index) => {
+                                                const currentDate = new Date(childItem.selectTime).getTime()
+                                                const beginDiff = currentDate - (new Date(item.inTimeStr)).getTime()
+                                                const endDiff = currentDate - (new Date(item.leaveTimeStr)).getTime()
+                                                const isSelect = beginDiff >= 0 && endDiff <= 0 ? true : false
+                                                return (
+                                                    <td className={isSelect ? "current" : ''} key={childItem + index}>
+                                                        {
+                                                            item.inTimeStr == childItem.selectTime ?
+                                                                item.customerName : null
+                                                        }
+                                                    </td>
+                                                )
+                                            }) : null
+                                    }
+                                </tr>
+                            )
+
+                        })
+                    }
                 </tbody>
             </table>
-        </div>
+        </div >
     )
 }
 
 const mapStateToProps = (state) => {
     return {
         time_list: state.status.time_list,
-        hotelId: state.status.hotelId
+        hotelId: state.login.hotelId,
+        beginTime: state.status.beginTime,
+        endTime: state.status.endTime,
+        data: state.status.data,
+        token: state.login.token
     }
 }
 const mapDispatchProps = (dispatch) => {

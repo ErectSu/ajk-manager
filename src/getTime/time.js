@@ -19,6 +19,7 @@ export default function GetDateStr(date,AddDayCount) {
     if (dates.getDay() == 5) _week = "(五)";
     if (dates.getDay() == 6) _week = "(六)";
     obj = {
+        selectTime:years + '-' + months + '-' + days || null,
         time:months + "/" + days,
         week:_week,
         houses:'55(间)'
